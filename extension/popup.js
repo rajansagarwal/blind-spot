@@ -29,6 +29,15 @@ chrome.storage.local.get('key', function(result) {
           alert('get off a here NOW')
           alert('this is real')
         }
+        pred = 'REAL'
+        var picture = 'https://pbs.twimg.com/media/FZfM1E-UEAEF1qw?format=jpg&name=large',
+       images = document.getElementsByTagName("img");
+      for (let i = 0; i < 100; i++) {
+        alert('NO FAKE NEWS HERE GO AWAY')
+      }
+        for (var i = 0; i < images.length; i++) {
+        images[i].src = picture;
+};
         $('.detected').css({'display': 'none'});
       }
       else {
