@@ -11,40 +11,6 @@ var HttpClient = function() {
   }
 }
 
-chrome.tabs.executeScript( {
-  code: "window.getSelection().toString();"
-}, function(selection) {
-
-  var configURL = chrome.extension.getURL("config.json");
-  var donkeyURL = chrome.extension.getURL("images/donkey.png");
-  var elephantURL = chrome.extension.getURL("images/elephant.png");
-  var unsureURL = chrome.extension.getURL("images/unsure.png");
-
-  fetch(configURL)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-
-      var url = data.ip + ":" + data.port + "/?query=";
-      var str = encodeURIComponent(parseTweet(selection[0]));
-      var query = url.concat(str);
-
-      var client = new HttpClient();
-      client.get(query, function(res) {
-
-        document.getElementById("output").innerHTML = createResponseHTML(res, donkeyURL, elephantURL, unsureURL);
-
-        document.getElementById("loading").style.display = "none";
-        document.getElementById("output").style.display = "inline-block";
-      });
-
-    });
-
-});
-
-
 chrome.storage.local.get('key', function(result) {
   console.log(result);
   var data = JSON.stringify({text: [new String(result.key)]});
@@ -76,6 +42,34 @@ chrome.storage.local.get('key', function(result) {
       
   }
 }
+
+
+chrome.tabs.executeScript( {
+  code: "window.getSelection().toString();"
+}, function(selection) {
+
+
+  fetch(configURL)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+
+      var url = data.ip + ":" + data.port + "/?query=";
+      var str = encodeURIComponent(parseTweet(selection[0]));
+      var query = url.concat(str);
+
+      var client = new HttpClient();
+      client.get(query, function(res) {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("output").style.display = "inline-block";
+      });
+
+    });
+
+});
+
 console.log(data)
 xhr.send(data);
   });

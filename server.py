@@ -4,10 +4,6 @@ import joblib
 app = Flask(__name__)
 classifier = joblib.load('./model/pipeline.pkl')
 
-# @app.route('/')
-# def hello_world():
-#     return 'Hello, World!'
-
 @app.route('/predict', methods=['POST'])
 def predict():
     json_ = request.json
