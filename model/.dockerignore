@@ -1,0 +1,10 @@
+.git
+.ipynb_checkpoints
+/checkpoint
+/data
+/models
+*.ipynb
+*.npy
+*.csv
+*.dvc
+*.md

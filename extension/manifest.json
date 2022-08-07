@@ -1,0 +1,27 @@
+{
+    "name": "Fake News Extension",
+    "description": "An extension which alerts a user to potential fake news",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "web_accessible_images": [
+      "*.png"
+    ],
+    "content_scripts": [{
+        "matches" : ["<all_urls>"],
+        "js": ["jquery-3.6.0.min.js", "mlrequest.js"],
+        "run_at": "document_end"
+      }],
+    "permissions": ["storage", "tabs", "scripting", "activeTab", "nativeMessaging"],
+    "icons": {
+      "16": "/images/16.png",
+      "32": "/images/32.png",
+      "48": "/images/48.png",
+      "128": "/images/128.png"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    }
+  }

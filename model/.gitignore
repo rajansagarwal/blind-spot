@@ -1,0 +1,7 @@
+/checkpoint
+*.npy
+*.csv
+*.txt
+*.tar
+*.tar.gz
+*.tgz

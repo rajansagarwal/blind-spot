@@ -1,0 +1,38 @@
+.icon {
+position: absolute;
+top: 25%;
+}
+.heading {
+display: flex;
+}
+.left {
+flex: 0 0 15%;
+position: relative;
+}
+.right {
+flex: 1;
+}
+.body {
+width: 275px;
+}
+.default {
+    display: block;
+}
+.detected {
+    display: none;
+}
+.detected_icon {
+    position: absolute;
+    color: red; 
+    top: 25%;
+}
+.detected_header {
+    color: red;
+}
+.detected_left {
+    flex: 0 0 15%;
+    position: relative;
+}
+.detected_right {
+    flex: 1;
+}
