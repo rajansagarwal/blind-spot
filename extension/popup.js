@@ -79,7 +79,7 @@ function getActualPrediction(pred, confidence) {
     return pred;
   }
   if(confidence >= 0.6) {
-    return "Possibly " + pred;
+    return "FAKE ~ prob: " + pred;
   }
-  return "Unsure";
+  return "REAL";
 }

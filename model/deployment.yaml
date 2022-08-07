@@ -3,14 +3,13 @@ kind: Deployment
 metadata:
   annotations:
     deployment.kubernetes.io/revision: "4"
-  creationTimestamp: "2020-03-18T23:59:44Z"
   generation: 4
   labels:
-    app: poli-bias-app
-  name: poli-bias-app
+    app: blind-spot
+  name: blind-spot
   namespace: default
   resourceVersion: "183459"
-  selfLink: /apis/apps/v1/namespaces/default/deployments/poli-bias-app
+  selfLink: /apis/apps/v1/namespaces/default/deployments/blind-spot
   uid: 8a7afcef-6974-11ea-bef9-42010a8e01a8
 spec:
   progressDeadlineSeconds: 600
@@ -18,7 +17,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: poli-bias-app
+      app: blind-spot
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -28,7 +27,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: poli-bias-app
+        app: blind-spot
     spec:
       containers:
       - image: gcr.io/poli-bias-project/poli-bias-img
