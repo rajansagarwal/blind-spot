@@ -19,29 +19,29 @@ gpt2.load_gpt2(sess)
 
 generate_count = 0
 
-@app.route('/', methods=['GET', 'POST', 'HEAD'])
+
+@app.route("/", methods=["GET", "POST", "HEAD"])
 async def homepage(request):
     global generate_count
     global sess
 
-    if request.method == 'GET':
+    if request.method == "GET":
         params = request.query_params
-    elif request.method == 'POST':
+    elif request.method == "POST":
         params = await request.json()
-    elif request.method == 'HEAD':
-        return UJSONResponse({'text': ''},
-                             headers={'Access-Control-Allow-Origin': '*'})
+    elif request.method == "HEAD":
+        return UJSONResponse({"text": ""}, headers={"Access-Control-Allow-Origin": "*"})
 
-    query = "// {} ||".format(unquote(params.get('query','')))
+    query = "// {} ||".format(unquote(params.get("query", "")))
 
-    print("Query received: {}".format(unquote(params.get('query',''))))
+    print("Query received: {}".format(unquote(params.get("query", ""))))
 
     start_time = time.time()
     preds, proba = predict(sess, query)
     pred_time = time.time() - start_time
 
     # Add third option
-    proba = np.concatenate((proba, np.array([1-np.sum(proba)])))
+    proba = np.concatenate((proba, np.array([1 - np.sum(proba)])))
     preds.append("Other")
 
     print("Predictions: {}".format(preds))
@@ -58,13 +58,18 @@ async def homepage(request):
         generate_count = 0
 
     gc.collect()
-    return UJSONResponse({'prediction': preds[0],
-                          'confidence': '{:.2f}'.format(proba[0]),
-                          'pred_time': '{:.2f}s'.format(pred_time)},
-                          headers={'Access-Control-Allow-Origin': '*'})
+    return UJSONResponse(
+        {
+            "prediction": preds[0],
+            "confidence": "{:.2f}".format(proba[0]),
+            "pred_time": "{:.2f}s".format(pred_time),
+        },
+        headers={"Access-Control-Allow-Origin": "*"},
+    )
 
-if __name__ == '__main__':
-    host = '127.0.0.1'
+
+if __name__ == "__main__":
+    host = "127.0.0.1"
     port = 5000
 
     if len(sys.argv) > 1:
@@ -72,4 +77,4 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         port = int(sys.argv[2])
 
-    uvicorn.run(app, host=host, port=int(os.environ.get('PORT', port)))
+    uvicorn.run(app, host=host, port=int(os.environ.get("PORT", port)))
